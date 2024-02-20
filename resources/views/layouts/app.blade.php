@@ -36,6 +36,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('cart') }}">Cart</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('orders.index') }}">My orders</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -78,7 +81,15 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                @if(session()->has('message'))
+                    <div class="alert alert-info">
+                        {{ session('message') }}
+                    </div>
+                @endif
+                <h1 class="mb-3">@yield('title')</h1>
+                @yield('content')
+            </div>
         </main>
     </div>
 </body>

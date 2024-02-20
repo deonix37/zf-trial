@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,11 @@ Auth::routes();
 
 Route::get('/', CatalogController::class)
     ->name('catalog');
+
+Route::middleware('auth')->group(function () {
+    Route::resource('orders', OrderController::class)
+        ->only(['index', 'store']);
+});
 
 Route::get('/cart', [CartController::class, 'index'])
     ->name('cart');
