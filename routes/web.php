@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CatalogController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,9 @@ Auth::routes();
 Route::get('/', CatalogController::class)
     ->name('catalog');
 
+Route::get('/cart', [CartController::class, 'index'])
+    ->name('cart');
+Route::post('/cart/add-product', [CartController::class, 'addProduct'])
+    ->name('cart.add-product');
+Route::post('/cart/remove-product', [CartController::class, 'removeProduct'])
+    ->name('cart.remove-product');
